@@ -1,8 +1,11 @@
 package com.twu.biblioteca.commands;
 
 import com.twu.biblioteca.Biblioteca;
-import com.twu.biblioteca.commands.ListBooksCommand;
+import com.twu.biblioteca.Book;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -15,11 +18,12 @@ public class ListBooksCommandTest {
     @Test
     public void shouldListBooksOnExecute() {
         Biblioteca biblioteca = mock(Biblioteca.class);
-        ListBooksCommand listBooksCommand = new ListBooksCommand(biblioteca);
+        List<Book> availableBooks = mock(List.class);
+        ListBooksCommand listBooksCommand = new ListBooksCommand(biblioteca, availableBooks);
 
         listBooksCommand.execute();
 
-        verify(biblioteca).listBooks();
+        verify(biblioteca).listBooks(availableBooks);
     }
 
 

@@ -18,7 +18,7 @@ public class BibliotecaTest {
 
     private PrintStream printStream;
     private Biblioteca biblioteca;
-    private ArrayList<Book> books;
+    private ArrayList<Book> availableBooks;
     private Book book1;
     private UserInputStream userInputStream;
     private ArrayList<Book> unavailableBooks;
@@ -28,23 +28,23 @@ public class BibliotecaTest {
         userInputStream = mock(UserInputStream.class);
         printStream = mock(PrintStream.class);
         book1 = new Book("Title", "Author", "Year");
-        books = new ArrayList<Book>();
-        books.add(book1);
+        availableBooks = new ArrayList<Book>();
+        availableBooks.add(book1);
         unavailableBooks = new ArrayList<Book>();
         unavailableBooks.add(book1);
-        biblioteca = new Biblioteca(printStream, books, unavailableBooks, userInputStream);
+        biblioteca = new Biblioteca(printStream, availableBooks, unavailableBooks, userInputStream);
     }
 
     @Test
     public void shouldPrintEachBook() {
-        biblioteca.listBooks();
+        biblioteca.listBooks(availableBooks);
 
-        verify(printStream, times(books.size())).println(anyString());
+        verify(printStream, times(availableBooks.size())).println(anyString());
     }
 
     @Test
     public void shouldPrintBookObjectsFromListBooks(){
-        biblioteca.listBooks();
+        biblioteca.listBooks(availableBooks);
 
         verify(printStream).println(contains(book1.toString()));
     }
@@ -72,7 +72,7 @@ public class BibliotecaTest {
         when(userInputStream.getUserInput()).thenReturn("1");
 
         biblioteca.checkoutBook();
-        biblioteca.listBooks();
+        biblioteca.listBooks(availableBooks);
 
         verify(printStream, never()).println(contains("Title"));
     }
@@ -120,5 +120,15 @@ public class BibliotecaTest {
         biblioteca.checkInBook();
 
         verify(printStream).println(contains("That is not a valid book to return."));
+    }
+
+    @Test
+    public void shouldListCheckedOutBookWhenUserWantsToCheckIn() {
+        when(userInputStream.getUserInput()).thenReturn("Check In Book");
+
+        biblioteca.checkInBook();
+
+        verify(printStream).println(contains("Title"));
+
     }
 }

@@ -17,9 +17,9 @@ public class Biblioteca {
         this.userInputStream = userInputStream;
     }
 
-    public void listBooks() {
+    public void listBooks(List<Book> list) {
         int counter = 1;
-        for (Book book : availableBooks) {
+        for (Book book : list) {
             this.printStream.println(counter + ". " + book);
             counter++;
         }
@@ -37,6 +37,8 @@ public class Biblioteca {
     }
 
     public void checkInBook() {
+        listBooks(unavailableBooks);
+
         String bookNumber = getBookNumberFromUser("Input the book you would like to return:");
 
         if (isValidBookNumberForList(bookNumber, unavailableBooks)) {

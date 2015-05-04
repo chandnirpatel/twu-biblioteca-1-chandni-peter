@@ -111,5 +111,4 @@ public class MenuTest {
 
         verify(commandMock).execute();
     }
-
 }

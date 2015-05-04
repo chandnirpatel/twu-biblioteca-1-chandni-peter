@@ -19,10 +19,10 @@ public class Biblioteca {
         this.availableMovies = availableMovies;
     }
 
-    public void listBooks(List<Book> list) {
+    public void listBooks() {
         int counter = 1;
-        for (Book book : list) {
-            this.printStream.println(counter + ". " + book);
+        for (Book book : availableBooks) {
+            printStream.println(counter + ". " + book);
             counter++;
         }
     }
@@ -39,7 +39,7 @@ public class Biblioteca {
     }
 
     public void checkInBook() {
-        listBooks(unavailableBooks);
+        list(unavailableBooks);
 
         String bookNumber = getBookNumberFromUser("Input the book you would like to return:");
 
@@ -48,6 +48,14 @@ public class Biblioteca {
             printStream.println("Thank you for returning the book.");
         } else {
             printStream.println("That is not a valid book to return.");
+        }
+    }
+
+    private void list(List<Book> books) {
+        int counter = 1;
+        for (Book book : books) {
+            printStream.println(counter + ". " + book);
+            counter++;
         }
     }
 
@@ -66,7 +74,9 @@ public class Biblioteca {
     }
 
     public void listMovies() {
-        printStream.println(availableMovies.get(0).details());
+        for (Movie availableMovie : availableMovies) {
+            printStream.println(availableMovie.details());
+        }
     }
 }
 

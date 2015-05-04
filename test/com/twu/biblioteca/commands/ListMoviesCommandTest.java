@@ -1,7 +1,7 @@
 package com.twu.biblioteca.commands;
 
 import com.twu.biblioteca.Biblioteca;
-import com.twu.biblioteca.Book;
+import com.twu.biblioteca.Movie;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,17 +10,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 
-public class ListBooksCommandTest {
+public class ListMoviesCommandTest {
 
     @Test
-    public void shouldListBooksOnExecute() {
+    public void shouldListMoviesOnExecute() {
         Biblioteca biblioteca = mock(Biblioteca.class);
-        ListBooksCommand listBooksCommand = new ListBooksCommand(biblioteca);
+        ListMoviesCommand listMoviesCommand = new ListMoviesCommand(biblioteca);
 
-        listBooksCommand.execute();
+        listMoviesCommand.execute();
 
-        verify(biblioteca).listBooks();
+        verify(biblioteca).listMovies();
     }
-
-
 }

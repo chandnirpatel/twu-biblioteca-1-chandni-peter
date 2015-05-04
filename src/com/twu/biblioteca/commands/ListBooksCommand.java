@@ -12,13 +12,13 @@ public class ListBooksCommand implements Command {
     private Biblioteca biblioteca;
     private List<Book> availableBooks;
 
-    public ListBooksCommand(Biblioteca biblioteca, List<Book> availableBooks) {
+    public ListBooksCommand(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
         this.availableBooks = availableBooks;
     }
 
     @Override
     public void execute() {
-        biblioteca.listBooks(availableBooks);
+        biblioteca.listBooks();
     }
 }

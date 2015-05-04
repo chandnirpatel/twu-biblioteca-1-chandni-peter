@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.allOf;
@@ -22,6 +23,8 @@ public class BibliotecaTest {
     private Book book1;
     private UserInputStream userInputStream;
     private ArrayList<Book> unavailableBooks;
+    private List<Movie> availableMovies;
+    private Movie movie;
 
     @Before
     public void setUp() {
@@ -32,7 +35,10 @@ public class BibliotecaTest {
         availableBooks.add(book1);
         unavailableBooks = new ArrayList<Book>();
         unavailableBooks.add(book1);
-        biblioteca = new Biblioteca(printStream, availableBooks, unavailableBooks, userInputStream);
+        movie = new Movie("Name", "Year", "Director", 10);
+        availableMovies = new ArrayList<Movie>();
+        availableMovies.add(movie);
+        biblioteca = new Biblioteca(printStream, availableBooks, unavailableBooks, userInputStream, availableMovies);
     }
 
     @Test
@@ -130,5 +136,14 @@ public class BibliotecaTest {
 
         verify(printStream).println(contains("Title"));
 
+    }
+
+    @Test
+    public void shouldListAvailableMoviesWhenUserSelectsListMovies() {
+        when(userInputStream.getUserInput()).thenReturn("List Movies");
+
+        biblioteca.listMovies();
+
+        verify(printStream).println(contains("Name"));
     }
 }

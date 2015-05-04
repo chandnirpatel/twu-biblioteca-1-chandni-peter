@@ -9,12 +9,14 @@ public class Biblioteca {
     private List<Book> availableBooks;
     private List<Book> unavailableBooks;
     private UserInputStream userInputStream;
+    private List<Movie> availableMovies;
 
-    public Biblioteca(PrintStream printStream, List<Book> books, List<Book> unavailableBooks, UserInputStream userInputStream) {
+    public Biblioteca(PrintStream printStream, List<Book> books, List<Book> unavailableBooks, UserInputStream userInputStream, List<Movie> availableMovies) {
         this.printStream = printStream;
         this.availableBooks = books;
         this.unavailableBooks = unavailableBooks;
         this.userInputStream = userInputStream;
+        this.availableMovies = availableMovies;
     }
 
     public void listBooks(List<Book> list) {
@@ -61,6 +63,10 @@ public class Biblioteca {
     private void moveBookBetweenLists(int bookNumber, List<Book> source, List<Book> destination) {
         Book bookToMove = source.remove(bookNumber - 1);
         destination.add(bookToMove);
+    }
+
+    public void listMovies() {
+        printStream.println(availableMovies.get(0).details());
     }
 }
 

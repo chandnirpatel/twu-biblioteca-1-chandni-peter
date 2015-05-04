@@ -13,10 +13,12 @@ import java.util.Map;
 public class Main {
 
     private static List<Book> availableBooks;
+    private static List<Movie> availableMovies;
 
     public static void main(String[] args) {
         availableBooks = books();
-        Biblioteca biblioteca = new Biblioteca(System.out, availableBooks, new ArrayList<Book>(), new UserInputStream());
+        availableMovies = new ArrayList<Movie>();
+        Biblioteca biblioteca = new Biblioteca(System.out, availableBooks, new ArrayList<Book>(), new UserInputStream(), availableMovies);
         Menu menu = new Menu(System.out, biblioteca, new UserInputStream(), initializeMapMenu(biblioteca));
 
         menu.start();
